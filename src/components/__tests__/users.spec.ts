@@ -25,7 +25,9 @@ const mockUsers: User[] = [
 
 describe('Users Component', () => {
     let component: VueWrapper
-    let mockService: Mock
+    let mockService: {
+        getUsers: ReturnType<typeof vi.fn>
+    }
 
     beforeEach(async () => {
         // (axios.get as Mock).mockResolvedValue({
@@ -34,7 +36,7 @@ describe('Users Component', () => {
 
         mockService = {
             getUsers: vi.fn().mockResolvedValue(mockUsers)
-        } as any
+        } 
     
         component = mount(Users, {
             props: {
