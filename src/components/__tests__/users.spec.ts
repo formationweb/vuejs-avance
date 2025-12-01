@@ -1,4 +1,4 @@
-import { beforeEach, expect, test, describe, vi, type VitestUtils, type Mock } from 'vitest'
+import { beforeEach, expect, test, describe, vi, type VitestUtils, type Mock, afterEach } from 'vitest'
 import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
 import Users from '../Users.vue'
 import axios from 'axios'
@@ -6,8 +6,9 @@ import { ref } from 'vue'
 import { useSearch } from '../../composable/useSearch'
 import type { User } from '../../types/user'
 import UserCard from '../UserCard.vue'
+import { UsersService } from '../../services/UsersService'
 
-vi.mock('axios')
+//vi.mock('axios')
 
 const mockUsers: User[] = [
     {
@@ -24,19 +25,33 @@ const mockUsers: User[] = [
 
 describe('Users Component', () => {
     let component: VueWrapper
+    let mockService: Mock
 
     beforeEach(async () => {
-        (axios.get as Mock).mockResolvedValue({
-            data: mockUsers
-        })
+        // (axios.get as Mock).mockResolvedValue({
+        //     data: mockUsers
+        // })
+
+        mockService = {
+            getUsers: vi.fn().mockResolvedValue(mockUsers)
+        } as any
     
         component = mount(Users, {
             props: {
                 title: 'hello world'
+            },
+            global: {
+                provide: {
+                    usersService: mockService
+                }
             }
         })
 
         await flushPromises()
+    })
+
+    afterEach(() => {
+        mockService.getUsers.mockReset()
     })
 
     test('Liste affiche bien', () => {

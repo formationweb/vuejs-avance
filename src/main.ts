@@ -1,5 +1,10 @@
 import '@picocss/pico/css/pico.min.css'
 import { createApp } from 'vue'
 import App from './App.vue'
+import { UsersService } from './services/UsersService'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+
+app.provide('usersService', new UsersService())
+
+app.mount('#app')
