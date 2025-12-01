@@ -5,8 +5,13 @@ import { useSearch } from '../composable/useSearch';
 import type { User } from '../types/user';
 
 const users = ref<User[]>([])
-const search = ref('')
-const { usersFiltered } = useSearch(users, search)
+const { usersFiltered, search } = useSearch(users)
+
+const  { title } = defineProps<{
+    title?: string
+}>()
+
+console.log(title)
 
 async function getUsers() {
     const res = await axios.get('https://jsonplaceholder.typicode.com/users')

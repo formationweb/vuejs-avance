@@ -29,7 +29,11 @@ describe('Users Component', () => {
             data: mockUsers
         })
     
-        component = mount(Users)
+        component = mount(Users, {
+            props: {
+                title: 'hello world'
+            }
+        })
 
         await flushPromises()
     })
@@ -41,9 +45,17 @@ describe('Users Component', () => {
 
     test('Tester useSearch', () => {
         const users = ref(mockUsers)
-        const search = ref('ana')
-        const { usersFiltered } = useSearch(users, search)
+        const { usersFiltered, search } = useSearch(users)
+        search.value = 'ana'
         expect(usersFiltered.value).toHaveLength(1)
         expect(usersFiltered.value[0]).toHaveProperty('id', 1)
+    })
+
+    test('tester barre de recherche', async () => {
+        const input = component.find('input')
+        input.setValue('ana')
+        await input.trigger('change')
+        const elements = component.findAll('article')
+        expect(elements).toHaveLength(1)
     })
 })
