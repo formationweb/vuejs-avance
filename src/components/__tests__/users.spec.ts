@@ -5,6 +5,7 @@ import axios from 'axios'
 import { ref } from 'vue'
 import { useSearch } from '../../composable/useSearch'
 import type { User } from '../../types/user'
+import UserCard from '../UserCard.vue'
 
 vi.mock('axios')
 
@@ -39,7 +40,7 @@ describe('Users Component', () => {
     })
 
     test('Liste affiche bien', () => {
-        const elements = component.findAll('article')
+        const elements = component.findAllComponents(UserCard)
         expect(elements.length).toBeGreaterThan(0)
     })
 
@@ -55,7 +56,7 @@ describe('Users Component', () => {
         const input = component.find('input')
         input.setValue('ana')
         await input.trigger('change')
-        const elements = component.findAll('article')
+        const elements = component.findAllComponents(UserCard)
         expect(elements).toHaveLength(1)
     })
 })
