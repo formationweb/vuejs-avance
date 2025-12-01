@@ -1,18 +1,21 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { onMounted, ref, watchEffect } from 'vue';
+import axios from 'axios'
 
 let users = ref([])
 
 async function getUsers() {
-    const res = await fetch('https://jsonplaceholder.typicode.com/users')
-    users.value = await res.json()
+    const res = await axios.get('https://jsonplaceholder.typicode.com/users')
+    users.value = res.data
 }
 
 watchEffect(() => {
     console.log(users.value)
 })
 
-getUsers()
+onMounted(async () => {
+    await getUsers()
+})
 </script>
 
 <template>
