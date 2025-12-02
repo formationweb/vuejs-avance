@@ -7,6 +7,7 @@ import { useSearch } from '../../composable/useSearch'
 import type { User } from '../../types/user'
 import UserCard from '../UserCard.vue'
 import { UsersService } from '../../services/UsersService'
+import { createTestingPinia } from '@pinia/testing'
 
 //vi.mock('axios')
 
@@ -45,7 +46,13 @@ describe('Users Component', () => {
             global: {
                 provide: {
                     usersService: mockService
-                }
+                },
+                plugins: [
+                    createTestingPinia({
+                        createSpy: vi.fn,
+                        stubActions: false
+                    })
+                ]
             }
         })
 

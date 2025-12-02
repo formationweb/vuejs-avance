@@ -1,17 +1,18 @@
 import { inject, ref, type Ref } from "vue";
 import type { User } from "../types/user";
 import { UsersService } from "../services/UsersService";
+import { useUsersStore } from "../store/users";
+import { storeToRefs } from "pinia";
 
-export function useUsersFetch(users: Ref<User[]>) {
-    const usersService = inject<UsersService>('usersService')
+export function useUsersFetch() {
     const loading = ref(false)
     const error = ref('')
+    const usersStore = useUsersStore()
 
     async function getAll() {
         try {
             loading.value = true
-            const usersList = await usersService?.getUsers()
-            users.value = usersList ?? []
+            await usersStore.getUsers()
         }
         catch (err) {
             error.value = 'Erreur'
