@@ -1,6 +1,10 @@
-import { reactive, ref } from "vue"
+import { reactive, ref, type Reactive } from "vue"
 
-type FormFields = {
+export type FormFields = {
+    [key: string]: any
+}
+
+export type FormData = {
     [key: string]: any
 }
 
@@ -24,9 +28,9 @@ export function useSchemaForm(schema: {
         return valid
     }
 
-    function submit(onValid: (form: any) => void) {
+    function submit(onValid: (form: Reactive<FormFields>) => void) {
         if (validate()) {
-            onValid(form.value)
+            onValid({...form})
         }
     }
 

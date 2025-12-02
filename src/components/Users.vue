@@ -4,6 +4,8 @@ import { useSearch } from '../composable/useSearch';
 import type { User } from '../types/user';
 import { useUsersFetch } from '../composable/useUsersFetch';
 import { useUsersStore } from '../store/users';
+import FormRenderer from './FormRenderer.vue';
+import { userFormSchema } from '../schema/userSchema';
 
 const config = {
     component: defineAsyncComponent(() => import('./UserCard.vue')),
@@ -17,10 +19,6 @@ const usersStore = useUsersStore()
 const { usersFiltered, search } = useSearch()
 const { loading, getAll } = useUsersFetch()
 
-async function onCreateForm() {
-   // usersStore.createUser()
-}
-
 onMounted(async() => {
     await getAll()
 })
@@ -31,9 +29,11 @@ onMounted(async() => {
 
     <h1>Créer</h1>
 
-    <form @submit.prevent="onCreateForm">
-        <button>Créer un utilisateur</button>
-    </form>
+    <FormRenderer 
+        :schema="userFormSchema" 
+        @onSubmitSuccess="usersStore.createUser">
+        <button>Créer utilisateur</button>
+    </FormRenderer>
 
     <hr />
 
