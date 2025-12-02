@@ -69,8 +69,7 @@ describe('Users Component', () => {
     })
 
     test('Tester useSearch', () => {
-        const users = ref(mockUsers)
-        const { usersFiltered, search } = useSearch(users)
+        const { usersFiltered, search } = useSearch()
         search.value = 'ana'
         expect(usersFiltered.value).toHaveLength(1)
         expect(usersFiltered.value[0]).toHaveProperty('id', 1)

@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 import type { User } from "../types/user";
 import { inject, ref } from "vue";
-import type { UsersService } from "../services/UsersService";
+import type { UserPayload, UsersService } from "../services/UsersService";
+
 
 export const useUsersStore = defineStore('users', () => {
     const users = ref<User[]>([])
@@ -17,9 +18,18 @@ export const useUsersStore = defineStore('users', () => {
         users.value = users.value.filter(user => user.id != id)
     }
 
+    const createUser = async (payload: UserPayload) => {
+        const user = await usersService?.createUser(payload) as User
+        users.value = [
+            ...users.value,
+            user
+        ]
+    }
+
     return  {
         users,
         getUsers,
-        deleteUser
+        deleteUser,
+        createUser
     }
 })
