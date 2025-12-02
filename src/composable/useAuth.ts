@@ -1,18 +1,16 @@
-import { inject, ref } from "vue";
-import { AuthService } from "../services/AuthService";
+import { ref } from "vue";
+import { useAuthStore } from "../store/auth";
 
 export function useAuth() {
-    const email = ref('')
-    const password = ref('')
-    const authService = inject<AuthService>('authService')
-
-    async function login() {
-        await authService?.login(email.value, password.value)
-    }
+    const email = ref('host@example.com')
+    const password = ref('password123')
+    const { login } = useAuthStore()
 
     return {
         email,
         password,
-        login
+        submitAuth() {
+            return login(email.value, password.value)
+        }
     }
 }

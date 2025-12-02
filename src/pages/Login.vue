@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="login">
+    <form @submit.prevent="onLogin">
         <label>Email</label>
         <input type="text" v-model="email" name="email">
 
@@ -11,7 +11,15 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
 import { useAuth } from '../composable/useAuth';
 
-const { email, password, login } = useAuth()
+const router = useRouter()
+
+const { email, password, submitAuth } = useAuth()
+
+async function onLogin() {
+    await submitAuth()
+    router.push({ name: 'home' })
+}
 </script>
