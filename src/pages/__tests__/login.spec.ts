@@ -1,8 +1,10 @@
+import { createTestingPinia } from '@pinia/testing';
 import { mount, type VueWrapper } from "@vue/test-utils";
 import { beforeEach, describe, expect, test, vi, type Mock } from "vitest";
 import Login from '../Login.vue'
 import axios from "axios";
 import { AuthService } from "../../services/AuthService";
+import { router } from '../../routes'
 
 vi.mock('axios')
 
@@ -19,7 +21,14 @@ describe('Login Spec', () => {
             global: {
                 provide: {
                     authService: new AuthService()
-                } 
+                },
+                plugins: [
+                    router,
+                    createTestingPinia({
+                        createSpy: vi.fn,
+                        stubActions: false
+                    })
+                ]
             }
         })
     })

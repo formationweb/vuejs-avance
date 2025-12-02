@@ -12,6 +12,7 @@ import { useAuth } from "../useAuth";
 import { mount } from "@vue/test-utils";
 import { AuthService } from "../../services/AuthService";
 import { inject } from "vue";
+import { createTestingPinia } from "@pinia/testing";
 
 describe("useAuth Composable", () => {
   let mockService: {
@@ -35,6 +36,12 @@ describe("useAuth Composable", () => {
             provide: {
                 authService: mockService,
             },
+            plugins: [
+              createTestingPinia({
+                  createSpy: vi.fn,
+                  stubActions: false
+              })
+            ]
         }
       }
     );
@@ -45,11 +52,11 @@ describe("useAuth Composable", () => {
   });
 
   test("appelle login avec bons paramètres", async () => {
-    const { email, password, login } = composable
+    const { email, password, submitAuth } = composable
     email.value = "ana@test.com";
     password.value = "azerty";
 
-    await login();
+    await submitAuth();
 
     expect(mockService.login).toHaveBeenCalled();
   });
