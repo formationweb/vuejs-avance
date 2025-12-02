@@ -1,14 +1,37 @@
-const nom = ref('ana')
+const age = {
+    _value: 0,
+    get value() {
+        return this._value
+    },
+    set value(val) {
+        // ....
+        this._value = val
+    }
+}
 
-nom.value = 'ben'
+// ref()
 
-console.log(nom.value)
+const user = {
+    address: {
+        city: 'Paris'
+    }
+}
 
-///---
+let userProxy = new Proxy(user, {
+    set(obj, prop, val) {
+        // ...
+        obj[prop] = val
+        return true
+    },
+    get(obj, prop) {
+        return obj[prop]
+    }
+})
 
-const age = ref(18)
-const isMinor = ref(false)
-const isMinor = computed(() => age.value < 18)
-isMinor.value
+// reactive()
 
-// ...
+userProxy = {
+    address: {
+        city: 'lyon'
+    }
+}
