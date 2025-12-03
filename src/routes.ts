@@ -1,9 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Users from "./components/Users.vue";
 import Login from "./pages/Login.vue";
-import { inject } from "vue";
+import { defineAsyncComponent, inject } from "vue";
 import type { AuthService } from "./services/AuthService";
 import { useAuthStore } from "./store/auth";
+import Articles from "./pages/Articles.vue";
+
+// const AsyncArticles = defineAsyncComponent(() => import('./pages/Articles.vue'))
 
 export const routes = [
     {
@@ -13,6 +16,11 @@ export const routes = [
             requiredAuth: true
         },
         name: 'home'
+    },
+    {
+        path: '/articles',
+        component: Articles,
+        name: 'articlesId'
     },
     {
         path: '/login',
