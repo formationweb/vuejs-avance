@@ -15,9 +15,9 @@
 </template>
 
 <script setup lang="ts">
-import { useSchemaForm, type FieldSchema, type Schema } from '../composable/useSchemaForm';
+import { useSchemaForm, type FieldSchema, type Schema } from './useSchemaForm';
 import { fieldRegistry } from './fields/registry';
-
+import { getCurrentInstance, onMounted } from 'vue';
 
 const props = defineProps<{
   schema: Schema<readonly FieldSchema[]>
@@ -31,4 +31,9 @@ const { form, errors, submit } = useSchemaForm(props.schema)
 
 const handleSubmit = () =>
   submit((data) => emit('submitSuccess', data))
+
+onMounted(() => {
+    const instance = getCurrentInstance()
+    instance?.appContext.config.globalProperties.$log(`Init ${JSON.stringify(props.schema, null, 2)}`)
+})
 </script>
