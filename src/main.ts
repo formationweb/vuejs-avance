@@ -8,7 +8,7 @@ import './interceptor'
 import { createPinia } from 'pinia'
 import { FormSchemaPlugin } from './plugins/form-schema'
 import { piniaLogger } from './store/plugins/logger'
-import { piniaPersist } from './store/plugins/persit'
+import { piniaPersist } from './store/plugins/persist'
 
 const app = createApp(App)
 const pinia = createPinia()
