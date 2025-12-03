@@ -11,6 +11,7 @@
 
             Supprimer
         </button>
+        <slot slot="footer" :user></slot>
     </article>
 </template>
 

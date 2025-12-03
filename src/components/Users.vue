@@ -39,12 +39,12 @@ onMounted(async() => {
 
     <hr />
 
-    <!-- <UserCard v-for="user in usersFiltered" :key="user.id" :user="user" @on-delete="usersStore.deleteUser" /> -->
+    <UserCard v-for="user in usersFiltered" :key="user.id" :user="user" @on-delete="usersStore.deleteUser"></UserCard>
      <!-- v-memo améliore les performance d'un rendu lourd -->
-    <component 
+    <!-- <component 
         :is="config.component"
         v-bind="config.props"
         v-for="user in usersFiltered" :key="user.id" 
         :user="user" @on-delete="usersStore.deleteUser"
-    />
+    /> -->
 </template>
