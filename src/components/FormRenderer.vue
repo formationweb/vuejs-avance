@@ -15,20 +15,20 @@
 </template>
 
 <script setup lang="ts">
-import { useSchemaForm, type FormData } from '../composable/useSchemaForm';
+import { useSchemaForm, type FieldSchema, type Schema } from '../composable/useSchemaForm';
 import { fieldRegistry } from './fields/registry';
 
+
 const props = defineProps<{
-    schema: any
+  schema: Schema<readonly FieldSchema[]>
 }>()
 
-const emits = defineEmits<{
-    onSubmitSuccess: [any]
+const emit = defineEmits<{
+  (event: 'submitSuccess', data: any): void
 }>()
 
 const { form, errors, submit } = useSchemaForm(props.schema)
 
-const handleSubmit = () => submit((formData) => {
-    emits('onSubmitSuccess', formData)
-})
+const handleSubmit = () =>
+  submit((data) => emit('submitSuccess', data))
 </script>

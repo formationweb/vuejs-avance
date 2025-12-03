@@ -1,43 +1,70 @@
-import { reactive, ref, type Reactive } from "vue"
+import { reactive } from "vue"
 
-export type FormFields = {
-    [key: string]: any
+
+export type RuleString = string
+
+export type FieldSchema<Name extends string = string> = {
+  name: Name
+  type: string
+  label: string
+  placeholder?: string
+  rules?: RuleString
 }
 
-export type FormData = {
-    [key: string]: any
+export type Schema<F extends readonly FieldSchema[]> = {
+  fields: F
 }
 
-export function useSchemaForm(schema: {
-    fields: any[]
-}) {
-    const form = reactive<FormFields>({}) // { name: ...., email: ... }
-    const errors = reactive<FormFields>({}) // { name: .... }
+type Names<F extends readonly FieldSchema[]> = F[number]["name"]
 
-    function validate() {
-        let valid = true
-        schema.fields.forEach(field => {
-            if (field.rules?.includes('required') && !form[field.name]) {
-                errors[field.name] = 'Champs requis'
-                valid = false
-            }
-            else {
-                errors[field.name] = ''
-            }
-        })
-        return valid
+type FormFromFields<F extends readonly FieldSchema[]> = {
+  [K in Names<F>]: string
+}
+
+type ErrorsFromFields<F extends readonly FieldSchema[]> = {
+  [K in Names<F>]: string
+}
+
+export function useSchemaForm<const F extends readonly FieldSchema[]>(
+  schema: Schema<F>
+) {
+  type Form = FormFromFields<F>
+  type Errors = ErrorsFromFields<F>
+  type Name = Names<F>
+
+  const form = reactive({} as Form) as Form
+  const errors = reactive({} as Errors) as Errors
+
+  function validate() {
+    let valid = true
+
+    for (const field of schema.fields) {
+      const name = field.name as Name
+      const value = form[name]
+
+      const rules = field.rules?.split("|") ?? []
+
+      if (rules.includes("required") && !value) {
+        errors[name] = "Champ requis"
+        valid = false
+      } else {
+        errors[name] = ""
+      }
     }
 
-    function submit(onValid: (form: Reactive<FormFields>) => void) {
-        if (validate()) {
-            onValid({...form})
-        }
-    }
+    return valid
+  }
 
-    return {
-        form,
-        errors,
-        validate,
-        submit
+  function submit(onValid: (form: Form) => void) {
+    if (validate()) {
+      onValid({ ...form })
     }
+  }
+
+  return {
+    form,
+    errors,
+    validate,
+    submit
+  }
 }
