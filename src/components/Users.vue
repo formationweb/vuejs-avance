@@ -21,6 +21,8 @@ const { loading, getAll } = useUsersFetch()
 
 onMounted(async() => {
     await getAll()
+    console.log([...usersStore.$history])
+
 })
 </script>
 

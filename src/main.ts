@@ -7,9 +7,11 @@ import { AuthService } from './services/AuthService'
 import './interceptor'
 import { createPinia } from 'pinia'
 import { FormSchemaPlugin } from './plugins/form-schema'
+import { piniaLogger } from './store/plugins/logger'
 
 const app = createApp(App)
 const pinia = createPinia()
+pinia.use(piniaLogger())
 
 app.provide('usersService', new UsersService())
 app.provide('authService', new AuthService())
