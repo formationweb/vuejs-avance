@@ -4,7 +4,7 @@
     <TransitionGroup name="fade" mode="out-in">
         <Suspense v-for="article in articles" :key="article.id">
             <template #default>
-                <AsyncArticleDetail :article>
+                <AsyncArticleDetail :article >
                     <template #header="{ active }">
                         <h1>sazdz</h1>
                         <p>Est actif: {{ active }}</p>

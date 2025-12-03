@@ -9,7 +9,7 @@
                </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, index) in items" :key="item">
+                <tr v-for="(item, index) in items" :key="item.id">
                     <td v-for="column in columns" :key="column.key">
                         <slot :name="column.key" :item :index>
                             {{ item[column.key] }}
@@ -33,12 +33,12 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends { id: number } & Record<string, any>">
 type Column = { key: string, label: string }
 
 defineProps<{
     columns: Column[]
-    items: any[]
+    items: T[]
 }>()
 
 type SlotProps = {
@@ -47,7 +47,7 @@ type SlotProps = {
 }
 
 type DynamicSlotProps = {
-    [key: string]: (props: { item: any, index: number }) => void
+    [key: string]: (props: { item: T, index: number }) => void
 }
 
 const slots = defineSlots<SlotProps & DynamicSlotProps>()

@@ -6,7 +6,9 @@
         <template #action>
             <button>Supprimer</button>
         </template>
-       
+        <template #footer>
+            aaa
+        </template>
     </Datatable>
 </template>
 

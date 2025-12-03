@@ -2,7 +2,7 @@
     <article>
         <slot name="header" :active></slot>
        <header>{{  article.title }}</header>
-       <p>{{ article.body }}</p>
+       <p v-once>{{ article.body }}</p>
        <slot></slot>
        <input type="checkbox" v-model="active">
    </article>

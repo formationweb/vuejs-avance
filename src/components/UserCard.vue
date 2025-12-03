@@ -2,7 +2,15 @@
      <article>
         <header>{{  user.name }}</header>
         <p>{{ user.email }}</p>
-        <button @click="emits('onDelete', user.id)">Supprimer</button>
+        <button 
+            v-tooltip="'Supprimer'"
+            v-confirm="{
+                message: 'Etes vous ...',
+                onConfirm: () => emits('onDelete', user.id)
+            }">
+
+            Supprimer
+        </button>
     </article>
 </template>
 
