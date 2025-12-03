@@ -5,6 +5,7 @@ import { defineAsyncComponent, inject } from "vue";
 import type { AuthService } from "./services/AuthService";
 import { useAuthStore } from "./store/auth";
 import Articles from "./pages/Articles.vue";
+import UsersDemo from "./components/UsersDemo.vue";
 
 // const AsyncArticles = defineAsyncComponent(() => import('./pages/Articles.vue'))
 
@@ -26,6 +27,10 @@ export const routes = [
         path: '/login',
         component: Login,
         name: 'loginId'
+    },
+    {
+        path: '/users-demo',
+        component: UsersDemo
     }
 ]
 export const router = createRouter({
