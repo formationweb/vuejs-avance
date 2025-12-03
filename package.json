@@ -12,7 +12,8 @@
     "preview": "vite preview",
     "test": "vitest",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build"
+    "type-check": "vue-tsc --build",
+    "test:e2e": "cypress open"
   },
   "dependencies": {
     "@picocss/pico": "^2.1.1",
@@ -29,6 +30,7 @@
     "@vitejs/plugin-vue": "^6.0.2",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.8.1",
+    "cypress": "^15.7.1",
     "jsdom": "^27.2.0",
     "npm-run-all2": "^8.0.4",
     "typescript": "~5.9.0",
