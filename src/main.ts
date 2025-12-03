@@ -8,10 +8,14 @@ import './interceptor'
 import { createPinia } from 'pinia'
 import { FormSchemaPlugin } from './plugins/form-schema'
 import { piniaLogger } from './store/plugins/logger'
+import { piniaPersist } from './store/plugins/persit'
 
 const app = createApp(App)
 const pinia = createPinia()
 pinia.use(piniaLogger())
+pinia.use(piniaPersist({
+    include: ['users']
+}))
 
 app.provide('usersService', new UsersService())
 app.provide('authService', new AuthService())
