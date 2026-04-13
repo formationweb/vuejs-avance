@@ -1,6 +1,8 @@
 <template>
     <h1>{{  title }}</h1>
 
+    <Opacity color="black" :opacity="1" @change="console.log" />
+
     <input type="text" placeholder="Rechercher" v-model="search" @change="emits('onSearch', search)">
 
     <div v-if="!loading">
@@ -15,6 +17,7 @@
 import { onMounted, ref } from 'vue';
 import { useUserFetch } from '../composables/useUserFetch';
 import UserCard from './UserCard.vue';
+import Opacity from '../atomics/Opacity.vue';
 
 const search = ref('')
 
