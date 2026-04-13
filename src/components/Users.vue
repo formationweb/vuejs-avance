@@ -1,16 +1,19 @@
 <template>
-    <article v-for="user in users" :key="user.id">
-        <header>{{ user.name }}</header>
-        <p>{{ user.email }}</p>
-    </article>
+    <div v-if="!loading">
+        <article v-for="user in users" :key="user.id">
+            <header>{{ user.name }}</header>
+            <p>{{ user.email }}</p>
+        </article>
+    </div>
+    <div v-else>
+        Loading...
+    </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { useUserFetch } from '../composables/useUserFetch';
 
-const users = ref<any>([])
+const { users, getAll, loading } = useUserFetch()
 
-fetch('https://jsonplaceholder.typicode.com/users')
-    .then((res) => res.json())
-    .then((data) => users.value = data)
+getAll()
 </script>
