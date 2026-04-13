@@ -11,6 +11,7 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted } from 'vue';
 import { useUserFetch } from '../composables/useUserFetch';
 
 const { users, getAll, loading } = useUserFetch()
