@@ -39,6 +39,9 @@ describe('Users Component', () => {
                 provide: {
                     [usersServiceToken]: mockService
                 }
+            },
+            props: {
+                title: 'Test'
             }
         })
 
@@ -48,6 +51,17 @@ describe('Users Component', () => {
     test('Vérifier article', () => {
         const elements = component.findAll('article')
         expect(elements.length).toBeGreaterThan(0)
+    })
+
+    test('vérifier le titre', () => {
+        expect(component.text()).toContain('Test')
+    })
+
+    test('Tester search', async () => {
+        const input = component.find('input')
+        input.setValue('ana')
+        await input.trigger('change')
+        expect(component.emitted('onSearch')?.[0]).toEqual(['ana'])
     })
 })
 
