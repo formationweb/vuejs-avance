@@ -1,6 +1,6 @@
 <template>
-    <input  type="range" min="0"  max="1"  step="0.01" v-model="alpha" />
-    <div :style="{ backgroundColor: color, opacity: alpha }"></div>
+    <input id="opacity" type="range" min="0"  max="1"  step="0.01" v-model="alpha" />
+    <div id="preview" :style="{ backgroundColor: color, opacity: alpha }"></div>
 </template>
 
 <script lang="ts" setup>

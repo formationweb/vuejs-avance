@@ -59,7 +59,8 @@ describe('Users Component', () => {
     })
 
     test('Tester search', async () => {
-        const input = component.find('input')
+        const input = component.find<HTMLInputElement>('#search')
+        //input.element.value
         input.setValue('ana')
         await input.trigger('change')
         expect(component.emitted('onSearch')?.[0]).toEqual(['ana'])
