@@ -3,6 +3,7 @@ import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
 import Users from '../Users.vue'
 import { UsersService } from '../../services/users'
 import { usersServiceToken } from '../../token'
+import UserCard from '../UserCard.vue'
 
 // class MockUsersService {
 //     async getAll() {
@@ -49,7 +50,7 @@ describe('Users Component', () => {
     })
 
     test('Vérifier article', () => {
-        const elements = component.findAll('article')
+        const elements = component.findAllComponents(UserCard)
         expect(elements.length).toBeGreaterThan(0)
     })
 
