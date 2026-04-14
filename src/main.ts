@@ -5,6 +5,7 @@ import { UsersService } from './services/users'
 import { authToken, usersServiceToken } from './token'
 import { AuthService } from './services/auth'
 import { createPinia } from 'pinia'
+import './interceptor'
 
 const app = createApp(App)
 

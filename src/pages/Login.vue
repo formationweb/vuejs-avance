@@ -14,8 +14,12 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { useAuth } from '../composables/useAuth';
+import { useAuthStore } from '../stores/auth';
+import { storeToRefs } from 'pinia';
 
 const router = useRouter()
+// const authStore = useAuthStore()
+// const { token } = storeToRefs(authStore)
 const { email, password, submitAuth } = useAuth()
 
 async function onLogin() {
