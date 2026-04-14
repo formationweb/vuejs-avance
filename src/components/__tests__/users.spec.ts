@@ -4,6 +4,7 @@ import Users from '../Users.vue'
 import { UsersService } from '../../services/users'
 import { usersServiceToken } from '../../token'
 import UserCard from '../UserCard.vue'
+import { createTestingPinia } from '@pinia/testing'
 
 // class MockUsersService {
 //     async getAll() {
@@ -39,7 +40,11 @@ describe('Users Component', () => {
             global: {
                 provide: {
                     [usersServiceToken]: mockService
-                }
+                },
+                plugins: [createTestingPinia({
+                    createSpy: vi.fn,
+                    stubActions: false
+                })]
             },
             props: {
                 title: 'Test'

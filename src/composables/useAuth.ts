@@ -5,7 +5,6 @@ import { useAuthStore } from "../stores/auth";
 export type AuthReturn = {
     email: Ref<string>
     password: Ref<string>
-    token: Ref<string>
     submitAuth: () => Promise<void>
 }
 
