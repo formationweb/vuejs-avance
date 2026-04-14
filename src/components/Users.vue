@@ -29,6 +29,7 @@ const emits = defineEmits<{
     onSearch: [string]
 }>()
 
+
 const { users, getAll, loading } = useUserFetch()
 
 getAll()
