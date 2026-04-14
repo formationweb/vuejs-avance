@@ -1,14 +1,8 @@
 <template>
     <h1>login</h1>
-    <form @submit.prevent="onLogin">
-        <label>Email</label>
-        <input type="text" name="email" v-model="email" />
-
-         <label>Mot de passe</label>
-        <input type="password" name="password" v-model="password" />
-
+     <FormRenderer :schema="loginFormSchema" @submitSuccess="onLogin">
         <button>Se connecter</button>
-    </form>
+    </FormRenderer>
 </template>
 
 <script setup lang="ts">
@@ -22,7 +16,14 @@ const router = useRouter()
 // const { token } = storeToRefs(authStore)
 const { email, password, submitAuth } = useAuth()
 
-async function onLogin() {
+const loginFormSchema = {
+  fields: [
+    { name: "email", type: "text", label: "Adresse email", placeholder: "...", rules: "required|email" },
+    { name: "password", type: "password", label: "Mot de passe", placeholder: "...", rules: "required|min:2" }
+  ]
+}
+
+async function onLogin(data: any) {
     await submitAuth()
     router.push('/')
 }

@@ -8,6 +8,7 @@ import { createPinia } from 'pinia'
 import './interceptor'
 import { piniaLogger } from './stores/plugins/logger'
 import { piniaPersist } from './stores/plugins/persist'
+import { FormSchemaPlugin } from './plugins/form-schema'
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -20,6 +21,7 @@ pinia.use(piniaPersist({
 
 app.use(router)
 app.use(pinia)
+app.use(FormSchemaPlugin)
 app.provide(usersServiceToken, new UsersService())
 app.provide(authToken, new AuthService())
 
