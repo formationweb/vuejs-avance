@@ -1,5 +1,6 @@
 import { inject, ref, type Ref } from "vue";
 import { authToken } from "../token";
+import { useAuthStore } from "../stores/auth";
 
 export type AuthReturn = {
     email: Ref<string>
@@ -11,17 +12,17 @@ export type AuthReturn = {
 export function useAuth(): AuthReturn {
     const email = ref('host@example.com')
     const password = ref('password123')
-    const token = ref('')
+    const authStore = useAuthStore()
     const authService = inject(authToken)
 
     async function submitAuth() {
-        token.value = (await authService?.login(email.value, password.value)) ?? ''
+       const token = await authService?.login(email.value, password.value)
+       authStore.setToken(token ?? '')
     }
 
     return {
         email,
         password,
-        token,
         submitAuth
     }
 }
