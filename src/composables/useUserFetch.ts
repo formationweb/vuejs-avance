@@ -7,7 +7,7 @@ import { storeToRefs } from "pinia"
 
 export function useUserFetch() {
     const userStore = useUserStore()
-    const { users } = storeToRefs(userStore)
+    const { usersFiltered: users } = storeToRefs(userStore)
     const loading = ref(true)
     const error = ref('')
     const usersService = inject<UsersService>(usersServiceToken)

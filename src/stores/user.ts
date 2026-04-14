@@ -1,18 +1,34 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import type { User } from "../types/user";
 
 export const useUserStore = defineStore('user', () => {
     // state
      const users = ref<User[]>([])
+     const nameSearch = ref('')
+
+     // getter
+     const usersFiltered = computed(() => {
+        if (!nameSearch.value) {
+            return users.value
+        }
+        return users.value.filter(user => user.name.startsWith(nameSearch.value))
+     })
 
     // action
     function setUsers(val: User[]) {
         users.value = val
     }
 
+    function setNameSearch(val: string) {
+        nameSearch.value = val
+    }
+
     return {
         users,
-        setUsers
+        usersFiltered,
+        nameSearch,
+        setUsers,
+        setNameSearch
     }
 })
