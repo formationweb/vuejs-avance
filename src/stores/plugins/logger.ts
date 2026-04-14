@@ -28,7 +28,7 @@ export function piniaLogger(options: PiniaLogOptions = { max: 10 }) {
         storeId,
         date: new Date(),
       });
-      if (history.length > options.max) {
+      if (history.length > max) {
         history.shift()
       }
       console.log(`${type}: ${storeId}`);

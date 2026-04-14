@@ -7,11 +7,16 @@ import { AuthService } from './services/auth'
 import { createPinia } from 'pinia'
 import './interceptor'
 import { piniaLogger } from './stores/plugins/logger'
+import { piniaPersist } from './stores/plugins/persist'
 
 const app = createApp(App)
 const pinia = createPinia()
 
 pinia.use(piniaLogger())
+
+pinia.use(piniaPersist({
+ include: ['user'],
+}))
 
 app.use(router)
 app.use(pinia)
