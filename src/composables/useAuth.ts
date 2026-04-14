@@ -1,7 +1,14 @@
-import { inject, ref } from "vue";
+import { inject, ref, type Ref } from "vue";
 import { authToken } from "../token";
 
-export function useAuth() {
+export type AuthReturn = {
+    email: Ref<string>
+    password: Ref<string>
+    token: Ref<string>
+    submitAuth: () => Promise<void>
+}
+
+export function useAuth(): AuthReturn {
     const email = ref('host@example.com')
     const password = ref('password123')
     const token = ref('')
