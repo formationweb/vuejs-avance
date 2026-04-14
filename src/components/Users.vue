@@ -3,7 +3,7 @@
 
     <Opacity color="black" :opacity="1" @change="console.log" />
 
-    <input id="search" type="text" placeholder="Rechercher" v-model="search" @change="emits('onSearch', search)">
+    <!-- <input id="search" type="text" placeholder="Rechercher" v-model="search" @change="emits('onSearch', search)"> -->
 
     <div v-if="!loading">
         <UserCard  v-for="user in users" :key="user.id" :user="user" />
