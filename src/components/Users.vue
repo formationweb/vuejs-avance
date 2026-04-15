@@ -5,19 +5,25 @@
 
     <!-- <input id="search" type="text" placeholder="Rechercher" v-model="search" @change="emits('onSearch', search)"> -->
 
-    <div v-if="!loading">
+    <!-- <div v-if="!loading">
         <UserCard  v-for="user in users" :key="user.id" :user="user">
                 <template #header>
                     <p>entête</p>
                 </template>
-                <template #default>
-                     <p>footer</p>
+                <template #default="{ active, user }">
+                     <p>L'utilisateur {{  user.name }} est {{  active }}</p>
                 </template>
         </UserCard>
     </div>
     <div v-else>
         Loading...
-    </div>
+    </div> -->
+    <Datatable :columns :items="users">
+            <template #actions="{ item, index }">
+                <button>Edit</button>
+                <button>Delete</button>
+            </template>
+    </Datatable>
 </template>
 
 <script lang="ts" setup>
@@ -25,7 +31,14 @@ import { onMounted, ref } from 'vue';
 import { useUserFetch } from '../composables/useUserFetch';
 import UserCard from './UserCard.vue';
 import Opacity from '../atomics/Opacity.vue';
+import Datatable from './Datatable.vue';
 
+const columns = [ 
+    { key: 'id', label: 'Id' }, 
+    { key: 'name', label: 'Name' },
+    { key: 'email', label: 'Email '},
+    { key: 'actions', label: 'Actions' }
+]
 const search = ref('')
 
 defineProps<{

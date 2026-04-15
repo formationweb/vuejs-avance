@@ -3,13 +3,17 @@
         <slot name="header"></slot>
         <header>{{ user.name }}</header>
         <p>{{ user.email }}</p>
-        <slot></slot>
+        <input type="checkbox" v-model="active">
+        <slot :active :user></slot>
     </article>
     <hr>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import type { User } from '../types/user';
+
+const active = ref(false)
 
 defineProps<{
     user: User
