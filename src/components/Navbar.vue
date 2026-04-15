@@ -1,4 +1,5 @@
 <template>
+    <h1 v-tooltip="tooltipName">Titre</h1>
     <input type="text" v-model="firstName">
     <button @click="search">Rechercher</button>
 </template>
@@ -9,6 +10,11 @@ import { useUserStore } from '../stores/user';
 
 const userStore = useUserStore()
 const firstName = ref('')
+const tooltipName = ref('Mon App')
+
+setTimeout(() => {
+    tooltipName.value = 'Foo'
+}, 2000)
 
 function search() {
      userStore.setNameSearch(firstName.value)

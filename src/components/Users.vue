@@ -6,14 +6,16 @@
     <!-- <input id="search" type="text" placeholder="Rechercher" v-model="search" @change="emits('onSearch', search)"> -->
 
     <!-- <div v-if="!loading">
-        <UserCard  v-for="user in users" :key="user.id" :user="user">
-                <template #header>
-                    <p>entête</p>
-                </template>
-                <template #default="{ active, user }">
-                     <p>L'utilisateur {{  user.name }} est {{  active }}</p>
-                </template>
-        </UserCard>
+       
+            <UserCard  v-for="user in users" :key="user.id" :user="user">
+                    <template #header>
+                        <p>entête</p>
+                    </template>
+                    <template #default="{ active, user }">
+                        <p>L'utilisateur {{  user.name }} est {{  active }}</p>
+                    </template>
+            </UserCard>
+        
     </div>
     <div v-else>
         Loading...

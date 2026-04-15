@@ -1,7 +1,7 @@
 <template>
     <article>
         <header>{{  article.title }}</header>
-        <p>{{  article.body }}</p>
+        <p v-once>{{  article.body }}</p>
     </article>
     <hr>
 </template>
