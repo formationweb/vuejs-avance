@@ -3,6 +3,9 @@ import Users from '../components/Users.vue'
 import Login from '../pages/Login.vue'
 import { useAuthStore } from '../stores/auth'
 import Main from '../layouts/Main.vue'
+import Articles from '../pages/Articles.vue'
+
+//const AsyncArticles = () => import('../pages/Articles.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,6 +20,10 @@ const router = createRouter({
     path: '/login',
     component: Login,
     name: 'loginId'
+  }, {
+    path: '/articles',
+    component: Articles,
+    name: 'articlesId'
   }],
 })
 
