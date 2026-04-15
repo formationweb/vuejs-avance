@@ -1,12 +1,14 @@
 <template>
     <form @submit.prevent="handleSubmit">
-        {{ tmpField }}
         <div v-for="field in schema.fields" :key="field.name">
             <component 
                 :is="fieldRegistry[field.type]" 
                 v-bind="field"
-                v-model="tmpField"
+                v-model="form[field.name]"
             />
+            <p v-show="errors[field.name]">
+                {{ errors[field.name] }}
+            </p>
         </div>
         <slot>
             <button>Soumettre</button>
@@ -17,20 +19,21 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { fieldRegistry } from './fields/registry';
+import { useSchemaForm, type FieldSchema, type Schema } from './useSchemaForm';
 
-const tmpField = ref('toto')
-
-defineProps<{
-    schema: {
-        fields: any[]
-    }
+const props = defineProps<{
+    schema: Schema<readonly FieldSchema[]>
 }>()
 
-defineEmits<{
+const { form, submit, errors } = useSchemaForm(props.schema)
+
+const emits = defineEmits<{
     'submitSuccess': [any]
 }>()
 
 const handleSubmit = () => {
-
+    submit((data) => {
+        console.log(data)
+    })
 }
 </script>

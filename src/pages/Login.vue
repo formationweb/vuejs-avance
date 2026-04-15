@@ -19,7 +19,7 @@ const { email, password, submitAuth } = useAuth()
 const loginFormSchema = {
   fields: [
     { name: "email", type: "text", label: "Adresse email", placeholder: "...", rules: "required|email" },
-    { name: "password", type: "password", label: "Mot de passe", placeholder: "...", rules: "required|min:2" }
+    { name: "password", type: "text", label: "Mot de passe", placeholder: "...", rules: "required|min:2" }
   ]
 }
 
