@@ -10,6 +10,7 @@ import { piniaLogger } from './stores/plugins/logger'
 import { piniaPersist } from './stores/plugins/persist'
 import { FormSchemaPlugin } from './plugins/form-schema'
 import { tooltip } from './directives/tooltip'
+import { confirm } from './directives/confirm'
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -28,5 +29,6 @@ app.use(FormSchemaPlugin, {
 app.provide(usersServiceToken, new UsersService())
 app.provide(authToken, new AuthService())
 app.directive('tooltip', tooltip)
+app.directive('confirm', confirm)
 
 app.mount('#app')
