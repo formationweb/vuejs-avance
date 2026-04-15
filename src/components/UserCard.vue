@@ -5,7 +5,7 @@
         <p>{{ user.email }}</p>
         <input type="checkbox" v-model="active">
         <slot :active :user></slot>
-        <button v-confirm="() => ...">Supprimer</button>
+        <button @click="emits('onDelete', user.id)">Supprimer</button>
     </article>
     <hr>
 </template>
@@ -18,5 +18,9 @@ const active = ref(false)
 
 defineProps<{
     user: User
+}>()
+
+const emits = defineEmits<{
+    onDelete: [number]
 }>()
 </script>

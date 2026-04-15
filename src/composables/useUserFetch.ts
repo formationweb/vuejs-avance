@@ -32,3 +32,19 @@ export function useUserFetch() {
         getAll
     }
 }
+
+export function useUser() {
+    const userStore = useUserStore()
+    const { usersFiltered: users } = storeToRefs(userStore)
+    const usersService = inject<UsersService>(usersServiceToken)
+
+    async function deleteUser(id: number) {
+        await usersService?.delete(id)
+        userStore.deleteUser(id)
+    }
+
+    return {
+        users,
+        deleteUser
+    }
+}

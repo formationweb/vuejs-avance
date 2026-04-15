@@ -20,6 +20,10 @@ export const useUserStore = defineStore('user', () => {
         users.value = val
     }
 
+    function deleteUser(id: number) {
+        users.value = users.value.filter(user => user.id != id)
+    }
+
     function setNameSearch(val: string) {
         nameSearch.value = val
     }
@@ -29,6 +33,7 @@ export const useUserStore = defineStore('user', () => {
         usersFiltered,
         nameSearch,
         setUsers,
-        setNameSearch
+        setNameSearch,
+        deleteUser
     }
 })

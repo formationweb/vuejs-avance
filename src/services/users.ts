@@ -8,4 +8,8 @@ export class UsersService {
         const res = await axios.get(this.url)
         return res.data
     }
+
+    async delete(id: number): Promise<void> {
+         await axios.delete(this.url + '/' + id)
+    }
 }

@@ -7,14 +7,14 @@
 
     <div v-if="!loading">
        
-            <UserCard  v-for="user in users" :key="user.id" :user="user">
-                    <template #header>
-                        <p>entête</p>
-                    </template>
-                    <template #default="{ active, user }">
-                        <p>L'utilisateur {{  user.name }} est {{  active }}</p>
-                    </template>
-            </UserCard>
+        <UserCard  v-for="user in users" :key="user.id" :user="user" @onDelete="deleteUser">
+                <template #header>
+                    <p>entête</p>
+                </template>
+                <template #default="{ active, user }">
+                    <p>L'utilisateur {{  user.name }} est {{  active }}</p>
+                </template>
+        </UserCard>
         
     </div>
     <div v-else>
@@ -30,7 +30,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import { useUserFetch } from '../composables/useUserFetch';
+import { useUser, useUserFetch } from '../composables/useUserFetch';
 import UserCard from './UserCard.vue';
 import Opacity from '../atomics/Opacity.vue';
 import Datatable from './Datatable.vue';
@@ -53,6 +53,7 @@ const emits = defineEmits<{
 
 
 const { users, getAll, loading } = useUserFetch()
+const { deleteUser } = useUser()
 
 getAll()
 </script>
