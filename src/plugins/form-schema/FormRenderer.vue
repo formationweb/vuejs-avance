@@ -32,8 +32,6 @@ const emits = defineEmits<{
 }>()
 
 const handleSubmit = () => {
-    submit((data) => {
-        console.log(data)
-    })
+    submit((data) => emits('submitSuccess', data))
 }
 </script>

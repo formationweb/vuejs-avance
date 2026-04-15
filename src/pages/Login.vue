@@ -24,6 +24,8 @@ const loginFormSchema = {
 }
 
 async function onLogin(data: any) {
+    email.value = data.value
+    password.value  = data.value
     await submitAuth()
     router.push('/')
 }
