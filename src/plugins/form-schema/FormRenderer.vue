@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { getCurrentInstance, onMounted, ref } from 'vue';
 import { fieldRegistry } from './fields/registry';
 import { useSchemaForm, type FieldSchema, type Schema } from './useSchemaForm';
 
@@ -34,4 +34,9 @@ const emits = defineEmits<{
 const handleSubmit = () => {
     submit((data) => emits('submitSuccess', data))
 }
+
+onMounted(() => {
+    const instance = getCurrentInstance()
+    instance?.appContext.config.globalProperties.$log(`Init ${JSON.stringify(props.schema)}`)
+})
 </script>

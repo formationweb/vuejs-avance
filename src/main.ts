@@ -21,7 +21,9 @@ pinia.use(piniaPersist({
 
 app.use(router)
 app.use(pinia)
-app.use(FormSchemaPlugin)
+app.use(FormSchemaPlugin, {
+    debug: true
+})
 app.provide(usersServiceToken, new UsersService())
 app.provide(authToken, new AuthService())
 
