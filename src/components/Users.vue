@@ -5,7 +5,7 @@
 
     <!-- <input id="search" type="text" placeholder="Rechercher" v-model="search" @change="emits('onSearch', search)"> -->
 
-    <!-- <div v-if="!loading">
+    <div v-if="!loading">
        
             <UserCard  v-for="user in users" :key="user.id" :user="user">
                     <template #header>
@@ -19,13 +19,13 @@
     </div>
     <div v-else>
         Loading...
-    </div> -->
-    <Datatable :columns :items="users">
+    </div>
+    <!-- <Datatable :columns :items="users">
             <template #actions="{ item, index }">
                 <button>Edit</button>
                 <button>Delete</button>
             </template>
-    </Datatable>
+    </Datatable> -->
 </template>
 
 <script lang="ts" setup>

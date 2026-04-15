@@ -5,6 +5,7 @@
         <p>{{ user.email }}</p>
         <input type="checkbox" v-model="active">
         <slot :active :user></slot>
+        <button v-confirm="() => ...">Supprimer</button>
     </article>
     <hr>
 </template>
